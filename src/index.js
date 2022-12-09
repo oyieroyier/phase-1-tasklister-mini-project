@@ -4,18 +4,22 @@ textbox.addEventListener("submit", (e) => {
 	buildToDo(e.target.new_task_description.value);
 });
 
-function buildToDo(todo) {
-	const paragraph = document.createElement("p");
+function buildToDo(e_target_new_task_description_value) {
+	const list = document.createElement("li");
 	const button = document.createElement("button");
+
+	list.textContent = `${e_target_new_task_description_value}  `;
+
 	button.textContent = "x";
-	paragraph.textContent = `${todo} `;
 
-	document.getElementById("main-content").append(paragraph);
-	paragraph.appendChild(button);
+	const unordered_list = document.getElementById("tasks");
 
-	button.addEventListener("click", deleteAction);
-}
+	unordered_list.appendChild(list);
+	list.appendChild(button);
 
-function deleteAction(paragraph) {
-	return paragraph.target.parentNode.remove();
+	button.addEventListener("click", deleteToDoItem);
+
+	function deleteToDoItem(list) {
+		return list.target.parentNode.remove();
+	}
 }
